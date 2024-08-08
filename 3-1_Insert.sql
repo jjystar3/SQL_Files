@@ -1,0 +1,120 @@
+CREATE TABLE CUSTOMER (
+	CUSTOMER_NO INT AUTO_INCREMENT PRIMARY KEY COMMENT '회원번호',
+	NAME VARCHAR(20) NOT NULL COMMENT '이름',
+	ADDRESS VARCHAR(100) COMMENT '주소'
+);
+
+INSERT INTO CUSTOMER (NAME, ADDRESS) VALUES('둘리', '서울');
+INSERT INTO CUSTOMER VALUES(2, '또치', '인천');
+
+INSERT INTO CUSTOMER(NAME,ADDRESS) VALUES('도우너', NULL);
+
+INSERT INTO CUSTOMER (NAME, ADDRESS)
+VALUES
+('고길동', '부산'),
+('마이콜', '부산');
+
+-- PK가 중복되서 에러남
+INSERT INTO CUSTOMER 
+VALUES(4, '고길동', '부산');
+
+-- NOT NULL 제약사항을 어겨서 에러남
+INSERT INTO CUSTOMER 
+VALUES(6, '이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이', NULL);
+
+CREATE TABLE BOOK (
+	BOOK_NO INT AUTO_INCREMENT PRIMARY KEY COMMENT '도서번호',
+	TITLE VARCHAR(30) NOT NULL COMMENT '제목',
+	PUBLISHER VARCHAR(100) COMMENT '출판사',
+	PUB_DATE DATE COMMENT '출간일',
+	PRICE INT COMMENT '가격'
+);
+
+INSERT INTO BOOK (TITLE, PUBLISHER, PUB_DATE, PRICE)
+VALUES
+('역사1', '상상마당', '2023-01-01', 10000),
+('역사2', '상상마당', '2023-01-02', 20000),
+('스프링웹프로젝트', '한빛미디어', '2023-02-01', 40000),
+('자바프로그래밍', NULL, NULL, NULL);
+
+CREATE TABLE CONTACTS (
+	LAST_NAME VARCHAR(255) NOT NULL COMMENT '성',
+	FIRST_NAME VARCHAR(255) NOT NULL COMMENT '이름',
+	EMAIL VARCHAR(255) NOT NULL COMMENT '이메일',
+	PHONE VARCHAR(20) COMMENT '연락처'
+);
+
+INSERT INTO CONTACTS 
+VALUES
+('이', '서연', 'stone@naver.com', '010-2341-0000'),
+('이', '시우', 'lavera@naver.com', NULL),
+('김', '지호', 'shyla@gmail.com', '010-3171-4126'),
+('김', '윤서', 'jeni@gmail.com', '010-8121-2341'),
+('최', '수아', 'fern@gmail.com', NULL);
+
+CREATE TABLE GIFT (
+	NAME VARCHAR(20) COMMENT '상품명',
+	TYPE VARCHAR(20) COMMENT '품목',
+	PRICE INT COMMENT '가격'
+);
+
+INSERT INTO GIFT 
+VALUES
+('참치세트', '식품', 10000),
+('햄세트', '식품', 20000),
+('샴푸세트', '생활용품', 30000),
+('세차용품', '생활용품', 40000),
+('주방용품', '생활용품', 50000),
+('노트북', '가전제품', 60000),
+('벽걸이TV', '가전제품', 70000);
+
+CREATE TABLE CLASS (
+	CLASS_NO INT AUTO_INCREMENT PRIMARY KEY COMMENT '수업번호',
+	CLASS_NAME VARCHAR(30) COMMENT '과목명',
+	CLASS_TIME TIME COMMENT '수업시간'
+);
+
+-- ISO8601
+INSERT INTO CLASS (CLASS_NAME, CLASS_TIME)
+VALUES
+('수학', '09:00:00'),
+('국어', '10:00:00'),
+('영어', '11:00:00');
+
+CREATE TABLE RESERVATION (
+	MOVIE_NAME VARCHAR(20) NOT NULL COMMENT '영화명',
+	USER_NAME VARCHAR(20) NOT NULL COMMENT '예약자명',
+	SEAT_NO VARCHAR(5) COMMENT '자리번호',
+	DATE DATE COMMENT '예약일'
+);
+
+INSERT INTO RESERVATION 
+VALUES
+('아바타', '둘리', 'A1', '2024-04-20'),
+('아바타', '또치', 'A2', '2024-04-20'),
+('아바타', '도우너', 'B1', '2024-04-21'),
+('슬램덩크', '짱구', 'A2', '2024-04-20'),
+('영웅', '고길동', 'B3', '2024-04-21');
+
+CREATE TABLE PRODUCT (
+	PRODUCT_NO INT PRIMARY KEY COMMENT '제품번호',
+	PRODUCT_NAME VARCHAR(20) COMMENT '제품명',
+	PRICE INT COMMENT '가격',
+	CATEGORY VARCHAR(10) COMMENT '카테고리(과자,음료,주류)'
+);
+
+INSERT INTO PRODUCT
+VALUES
+(1, '허니버터칩', 2300, '과자'),
+(2, '새우깡', 1100, '과자'),
+(3, '코카콜라', 1000, '음료'),
+(4, '아침에주스', 4900, '음료'),
+(5, '처음처럼', 3000, '주류'),
+(6, '참이슬', 2500, '주류');
+
+
+
+
+
+
+
