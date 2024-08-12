@@ -1,0 +1,44 @@
+CREATE TABLE TEST_TBL (
+	NO INT PRIMARY KEY COMMENT '번호',
+	CONTENT VARCHAR(100) NOT NULL COMMENT '내용'
+);
+
+-- 오토커밋 설정 확인
+SELECT @@autocommit;
+
+-- 오토커밋 off
+SET autocommit = 1;
+
+INSERT TEST_TBL VALUES (1, '1번');
+COMMIT; -- 작업 결과를 실제로 반영
+
+
+
+-- 트랜잭션 수동으로 시작
+
+START TRANSACTION;
+
+INSERT TEST_TBL VALUES (2, '2번');
+
+SELECT * FROM TEST_TBL; -- 실제 테이블에는 반영 안됨
+
+COMMIT;
+
+-- COMMIT 또는 ROLLBACK 하는 순간 트랜잭션 종료
+
+
+START TRANSACTION;
+INSERT TEST_TBL VALUES (3, '3번');
+UPDATE TEST_TBL SET CONTENT = '수정' WHERE NO = 2;
+SELECT * FROM TEST_TBL;
+ROLLBACK;
+
+
+
+
+
+
+
+
+
+

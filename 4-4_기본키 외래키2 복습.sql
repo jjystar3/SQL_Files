@@ -1,0 +1,89 @@
+-- 외래키를 쓰는 이유: 데이터의 정합성을 지키기 위해
+-- 논리적으로 잘못된 데이터가 테이블에 들어오는 것을 막기 위해서
+
+
+-- Q1
+CREATE TABLE USERS (
+	ID VARCHAR(20) PRIMARY KEY COMMENT '아이디',
+	PASSWORD VARCHAR(200) COMMENT '패스워드',
+	NAME VARCHAR(20) COMMENT '이름'
+);
+
+CREATE TABLE BOARD (
+	NO INT AUTO_INCREMENT PRIMARY KEY COMMENT '글번호',
+	TITLE VARCHAR(50) COMMENT '제목',
+	CONTENT VARCHAR(255) COMMENT '내용',
+	WRITER VARCHAR(20) COMMENT '작성자',
+	REG_DATE DATETIME COMMENT '등록일',
+	UPDATE_DATE DATETIME COMMENT '수정일',
+	FOREIGN KEY (WRITER) REFERENCES USERS(ID)
+);
+
+-- Q2
+INSERT INTO USERS VALUES
+('USER1', '1234', '홍길동'),
+('USER2', '1234', '김철수');
+
+INSERT INTO BOARD (TITLE, CONTENT, WRITER, REG_DATE, UPDATE_DATE)
+VALUES
+('안녕하세요~','안녕하세요~','USER1',NOW(),NOW()),
+('안녕하세요~','안녕하세요~','USER2',NOW(),NOW()),
+('출석체크합니다~','출석체크합니다~','USER1',NOW(),NOW()),
+('출석체크합니다~','출석체크합니다~','USER2',NOW(),NOW()),
+('등업해주세요~','등업해주세요~','USER2',NOW(),NOW());
+-- 사이트의 회원이 아닌 사용자를 작성자로 입력하면 에러남
+
+-- Q5
+CREATE TABLE CLASS (
+	CLASS_NO INT PRIMARY KEY COMMENT '수업번호',
+	CLASS_NAME VARCHAR(20) COMMENT '수업명'
+);
+
+CREATE TABLE STUDENT (
+	STUDENT_NO INT PRIMARY KEY COMMENT '학생번호',
+	STUDENT_NAME VARCHAR(20) COMMENT '학생명'
+);
+
+CREATE TABLE STUDENT_CLASS (
+	ST_NO INT COMMENT '학생번호',
+	CL_NO INT COMMENT '수강하는 수업의 번호',
+	FOREIGN KEY (ST_NO) REFERENCES STUDENT(STUDENT_NO),
+	FOREIGN KEY (CL_NO) REFERENCES CLASS(CLASS_NO)
+);
+
+-- Q6
+INSERT INTO CLASS 
+VALUES
+(1, '수학'),
+(2, '국어'),
+(3, '영어');
+INSERT INTO STUDENT 
+VALUES
+(1001, '김철수'),
+(1002, '이영희'),
+(1003, '홍길동');
+INSERT INTO STUDENT_CLASS 
+VALUES
+(1001, 1),
+(1002, 3),
+(1003, 2),
+(1001, 2),
+(1002, 1),
+(1001, 3),
+(1003, 1);
+
+-- 부모 테이블에 없는 학생을 입력하면 에러남
+
+
+
+
+
+
+
+
+
+
+
+
+
+
